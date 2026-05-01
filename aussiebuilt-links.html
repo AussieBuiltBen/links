@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aussie Built — Ben</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --y: #F5C518;
+    --g: #2B7A2B;
+    --gd: #1A4A1A;
+    --blk: #080C08;
+    --s1: #111611;
+    --s2: #181E18;
+    --s3: #222922;
+    --txt: #E8EBE8;
+    --dim: #7A8A7A;
+    --mid: #3A4A3A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--blk);
+    color: var(--txt);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(43,122,43,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 40% at 20% 100%, rgba(245,197,24,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 52px 20px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 36px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: up 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s forwards;
+  }
+
+  .wm-aussie {
+    display: block;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: 8px;
+    color: var(--y);
+    text-shadow: 0 0 60px rgba(245,197,24,0.25);
+  }
+
+  .wm-built {
+    display: block;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: 8px;
+    color: var(--g);
+    margin-top: -8px;
+    text-shadow: 0 0 60px rgba(43,122,43,0.3);
+  }
+
+  .header-rule {
+    width: 56px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--y), var(--g));
+    margin: 16px auto 14px;
+    border-radius: 2px;
+  }
+
+  .header-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* BIO */
+  .bio {
+    width: 100%;
+    background: var(--s1);
+    border: 1px solid var(--mid);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: up 0.6s cubic-bezier(0.22,1,0.36,1) 0.18s forwards;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bio::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--g), transparent);
+    opacity: 0.6;
+  }
+
+  .bio-av {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gd), var(--g));
+    border: 2px solid var(--g);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: var(--y);
+  }
+
+  .bio-text h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--txt);
+    margin-bottom: 2px;
+  }
+
+  .bio-text p {
+    font-size: 12px;
+    color: var(--dim);
+    line-height: 1.4;
+  }
+
+  /* SECTION LABEL */
+  .label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: up 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .label span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+
+  .label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--mid);
+    opacity: 0.5;
+  }
+
+  .group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 26px;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    gap: 13px;
+    transition: transform 0.18s cubic-bezier(0.22,1,0.36,1), box-shadow 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: up 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+  .btn:hover::after { opacity: 1; }
+  .btn:active { transform: translateY(0) scale(0.99); }
+
+  .btn-y { background: var(--y); box-shadow: 0 4px 20px rgba(245,197,24,0.22); }
+  .btn-y:hover { box-shadow: 0 8px 32px rgba(245,197,24,0.38); }
+
+  .btn-g { background: var(--g); box-shadow: 0 4px 20px rgba(43,122,43,0.22); }
+  .btn-g:hover { box-shadow: 0 8px 32px rgba(43,122,43,0.38); }
+
+  .btn-d { background: var(--s2); border: 1px solid var(--mid); }
+  .btn-d:hover { border-color: rgba(245,197,24,0.35); box-shadow: 0 8px 28px rgba(0,0,0,0.5); }
+
+  .btn-o { background: transparent; border: 1px solid var(--mid); }
+  .btn-o:hover { border-color: var(--g); }
+
+  .btn-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 17px;
+  }
+
+  .btn-y .btn-icon { background: rgba(0,0,0,0.13); }
+  .btn-g .btn-icon { background: rgba(0,0,0,0.16); }
+  .btn-d .btn-icon { background: var(--s3); }
+  .btn-o .btn-icon { background: var(--s2); }
+
+  .btn-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .btn-title {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .btn-y .btn-title { color: #0A0C0A; }
+  .btn-g .btn-title { color: #fff; }
+  .btn-d .btn-title, .btn-o .btn-title { color: var(--txt); }
+
+  .btn-sub {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .btn-y .btn-sub { color: #0A0C0A; opacity: 0.6; }
+  .btn-g .btn-sub { color: #fff; opacity: 0.7; }
+  .btn-d .btn-sub, .btn-o .btn-sub { color: var(--dim); }
+
+  .btn-end { flex-shrink: 0; margin-left: auto; }
+
+  .arrow { font-size: 15px; opacity: 0.45; }
+  .btn-y .arrow { color: #0A0C0A; }
+  .btn-g .arrow { color: #fff; }
+  .btn-d .arrow, .btn-o .arrow { color: var(--dim); }
+
+  .badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 5px;
+  }
+
+  .badge-free  { background: var(--gd); color: var(--y); }
+  .badge-price { background: var(--s3); color: var(--y); border: 1px solid var(--mid); }
+
+  /* SOCIALS */
+  .socials {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: up 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .s-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 12px 10px;
+    border-radius: 11px;
+    background: var(--s1);
+    border: 1px solid var(--mid);
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.18s ease;
+  }
+
+  .s-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .s-btn:hover { border-color: var(--y); color: var(--y); transform: translateY(-2px); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    opacity: 0;
+    animation: up 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  .footer p { font-size: 11.5px; color: var(--dim); line-height: 1.7; }
+  .footer a { color: var(--y); text-decoration: none; font-weight: 600; }
+  .footer a:hover { text-decoration: underline; }
+
+  .footer-brand {
+    margin-top: 22px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--mid);
+  }
+
+  @keyframes up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .d0  { animation-delay: 0.22s; }
+  .d1  { animation-delay: 0.30s; }
+  .d2  { animation-delay: 0.36s; }
+  .d3  { animation-delay: 0.42s; }
+  .d4  { animation-delay: 0.48s; }
+  .d5  { animation-delay: 0.54s; }
+  .d6  { animation-delay: 0.60s; }
+  .d7  { animation-delay: 0.66s; }
+  .d8  { animation-delay: 0.72s; }
+  .d9  { animation-delay: 0.78s; }
+  .d10 { animation-delay: 0.84s; }
+
+  @media (max-width: 480px) {
+    .wm-aussie, .wm-built { font-size: 54px; }
+    .page { padding: 40px 16px 52px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <span class="wm-aussie">AUSSIE</span>
+    <span class="wm-built">BUILT</span>
+    <div class="header-rule"></div>
+    <p class="header-tag">Personal Trainer &nbsp;·&nbsp; Real Training. Real Results.</p>
+  </header>
+
+  <div class="bio">
+    <div class="bio-av">BEN</div>
+    <div class="bio-text">
+      <h2>Ben — Aussie Built Bodies</h2>
+      <p>In-person &amp; online coaching worldwide.<br>6 days a week on the gym floor.</p>
+    </div>
+  </div>
+
+  <div class="label d0"><span>Work With Me</span></div>
+  <div class="group">
+
+    <a href="https://app.truecoach.co/coach-profile/aussiebuilt" target="_blank" class="btn btn-y d1">
+      <div class="btn-icon">💪</div>
+      <div class="btn-body">
+        <span class="btn-title">Start Online Coaching</span>
+        <span class="btn-sub">$50/week · Custom programs via TrueCoach</span>
+      </div>
+      <div class="btn-end"><span class="arrow">→</span></div>
+    </a>
+
+    <a href="https://www.aussiebuiltbodies.com/services" target="_blank" class="btn btn-g d2">
+      <div class="btn-icon">🏋️</div>
+      <div class="btn-body">
+        <span class="btn-title">View All Services</span>
+        <span class="btn-sub">In-person · Groups · Couples · Stretching</span>
+      </div>
+      <div class="btn-end"><span class="arrow">→</span></div>
+    </a>
+
+    <a href="https://aussiebuiltbodies.gumroad.com/subscribe" target="_blank" class="btn btn-d d3">
+      <div class="btn-icon">📋</div>
+      <div class="btn-body">
+        <span class="btn-title">Buy a Program</span>
+        <span class="btn-sub">Strength · Fat Loss · Combat Sports · Athletic</span>
+      </div>
+      <div class="btn-end"><span class="badge badge-price">$25</span></div>
+    </a>
+
+  </div>
+
+  <div class="label d4"><span>Free Resources</span></div>
+  <div class="group">
+
+    <a href="https://aussiebuiltbodies.gumroad.com/l/7DayFatLossKickstart" target="_blank" class="btn btn-d d5">
+      <div class="btn-icon">🔥</div>
+      <div class="btn-body">
+        <span class="btn-title">7-Day Fat Loss Kickstart</span>
+        <span class="btn-sub">Free beginner program · Download instantly</span>
+      </div>
+      <div class="btn-end"><span class="badge badge-free">FREE</span></div>
+    </a>
+
+  </div>
+
+  <div class="label d6"><span>Connect</span></div>
+  <div class="group">
+
+    <a href="https://www.instagram.com/aussiebuiltben" target="_blank" class="btn btn-o d7">
+      <div class="btn-icon">
+        <svg viewBox="0 0 24 24" fill="#E1306C" style="width:18px;height:18px">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </div>
+      <div class="btn-body">
+        <span class="btn-title">@aussiebuiltben</span>
+        <span class="btn-sub">Follow on Instagram</span>
+      </div>
+      <div class="btn-end"><span class="arrow">→</span></div>
+    </a>
+
+    <a href="mailto:aussiebuiltbodies@gmail.com" class="btn btn-o d8">
+      <div class="btn-icon">✉️</div>
+      <div class="btn-body">
+        <span class="btn-title">Email Me</span>
+        <span class="btn-sub">aussiebuiltbodies@gmail.com</span>
+      </div>
+      <div class="btn-end"><span class="arrow">→</span></div>
+    </a>
+
+  </div>
+
+  <div class="socials d9">
+    <a href="https://www.aussiebuiltbodies.com" target="_blank" class="s-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      Website
+    </a>
+    <a href="https://aussiebuiltbodies.gumroad.com/subscribe" target="_blank" class="s-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+      Programs
+    </a>
+    <a href="https://www.aussiebuiltbodies.com/contact" target="_blank" class="s-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Contact
+    </a>
+  </div>
+
+  <footer class="footer d10">
+    <p>Questions? <a href="mailto:aussiebuiltbodies@gmail.com">aussiebuiltbodies@gmail.com</a></p>
+    <p>or DM <a href="https://www.instagram.com/aussiebuiltben" target="_blank">@aussiebuiltben</a> on Instagram</p>
+    <p class="footer-brand">AUSSIE BUILT BODIES</p>
+  </footer>
+
+</div>
+</body>
+</html>
